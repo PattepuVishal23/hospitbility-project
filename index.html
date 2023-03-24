@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hotel Room Booking</title>
+    
+    <style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+
+		h1, h2, h3 {
+			color: #0071bc;
+		}
+
+		ul {
+			list-style: none;
+			padding: 0;
+		}
+
+		button {
+			background-color: #0071bc;
+			color: #fff;
+			border: none;
+			padding: 8px 16px;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		form label {
+			display: block;
+			margin-bottom: 8px;
+			color: #0071bc;
+			font-weight: bold;
+		}
+
+		form input, form textarea {
+			display: block;
+			margin-bottom: 16px;
+			padding: 8px;
+			border-radius: 4px;
+			border: 1px solid #ccc;
+			width: 100%;
+			box-sizing: border-box;
+			font-size: 16px;
+		}
+
+		form button {
+			background-color: #0071bc;
+			color: #fff;
+			border: none;
+			padding: 8px 16px;
+			border-radius: 4px;
+			cursor: pointer;
+			margin-top: 16px;
+		}
+
+		form button:hover {
+			background-color: #00538c;
+		}
+
+		.payment-options input[type="radio"] {
+			margin-right: 8px;
+		}
+
+		.payment-options label {
+			color: #0071bc;
+		}
+
+		.overlay {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(0,0,0,0.8);
+			z-index: 9999;
+		}
+
+		.popup {
+			display: none;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			width: 400px;
+			padding: 32px;
+			background-color: #fff;
+			border-radius: 8px;
+			box-shadow: 0 0 16px rgba(0,0,0,0.5);
+		}
+
+		.popup h3 {
+			margin-top: 0;
+			color: #0071bc;
+		}
+
+		.popup label {
+			display: block;
+			margin-bottom: 8px;
+			color: #0071bc;
+			font-weight: bold;
+		}
+
+		.popup input, .popup select {
+			display: block;
+			margin-bottom: 16px;
+			padding: 8px;
+			border-radius: 4px;
+			border: 1px solid #ccc;
+			width: 100%;
+			box-sizing: border-box;
+			font-size: 16px;
+		}
+
+		.popup button {
+			background-color: #0071bc;
+			color: #fff;
+			border: none;
+			padding: 8px 16px;
+			border-radius: 4px;
+			cursor: pointer;
+			margin-top: 16px;
+		}
+
+		.popup button:hover {
+			background-color: #00538c;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body>
+	<h1>Hotel Room Booking</h1>
+
+	<h2>Select a Room</h2>
+	<ul>
+		<li>
+			<h3>Standard Room</h3>
+			<p>Price: 1000/night</p>
+			<button onclick="openPopup('Standard Room')">Book Now</button>
+		</li>
+		<li>
+			<h3>Premium Room</h3>
+			<p>Price: 5000/night</p>
+			<button onclick="openPopup('Premium Room')">Book Now</button>
+		</li>
+	</ul>
+
+	<div class="overlay" id="overlay">
+		<div class="popup" id="popup">
+			<button class="close-btn" onclick="closePopup()">X</button>
+			<h3 id="popupTitle"></h3>
+			<form id="popupForm">
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name" required>
+
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email" required>
+
+				<label for="phone">Phone Number:</label>
+				<input type="tel" id="phone" name="phone" required>
+
+				<label for="address">Address:</label>
+				<textarea id="address" name="address" required></textarea>
+
+				<label for="payment">Payment Option:</label>
+				<div class="payment-options">
+					<input type="radio" id="creditCard" name="payment" value="creditCard" required>
+					<label for="creditCard">Credit Card</label>
+
+					<input type="radio" id="debitCard" name="payment" value="debitCard" required>
+					<label for="debitCard">Debit Card</label>
+
+					<input type="radio" id="cash" name="payment" value="cash" required>
+					<label for="cash">Cash</label>
+				</div>
+
+				<button type="submit">Book Now</button>
+			</form>
+		</div>
+	</div>
+
+	<style>
+        .popup {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 100;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+        }
+        
+        .close-btn {
+            font-size: 20px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        h1, h2, h3, p {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        
+        button {
+            font-family: Arial, sans-serif;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #3e8e41;
+        }
+        
+        input[type="text"], input[type="email"], input[type="tel"], textarea {
+            font-family: Arial, sans-serif;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+    </style>
+
+	<script>
+		function openPopup(roomType) {
+			document.getElementById('popupTitle').textContent = roomType;
+			document.getElementById('popupForm').reset();
+			document.getElementById('overlay').style.display = 'block';
+			document.getElementById('popup').style.display = 'block';
+		}
+
+		function closePopup() {
+			document.getElementById('overlay').style.display = 'none';
+			document.getElementById('popup').style.display = 'none';
+		}
+	</script>
+</body>
+
+
+</html>
